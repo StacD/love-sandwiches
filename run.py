@@ -4,7 +4,6 @@
 import gspread
 from google.oauth2.service_account import Credentials
 
-
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
@@ -42,7 +41,7 @@ def get_sales_data():
 
 def validate_data(values):
     """
-    Inside the try, converts all string values into intergers.
+    Inside the try, converts all string values into integers.
     Raises ValueError if strings cannot be converted into int,
     or if there aren't exactly 6 values.
     """
@@ -59,30 +58,9 @@ def validate_data(values):
     return True
 
 
-"""
-Example of code that we have refactored below in the update_worksheet function.
-def update_sales_worksheet(data):
--Update sales worksheet, add new row with the list data provided.
-
-print("Updating sales worksheet...\n")
-sales_worksheet = SHEET.worksheet("sales")
-sales_worksheet.append_row(data)
-print("Sales worksheet updated successfully.\n")
-
-def update_surplus_worksheet(data):
-
--Update surplus worksheet, add new row with the list data provided.
-
-print("Updating surplus worksheet...\n")
-surplus_worksheet = SHEET.worksheet("surplus")
-surplus_worksheet.append_row(data)
-print("Surplus worksheet updated successfully.\n")
-"""
-
-
 def update_worksheet(data, worksheet):
     """
-    Receives a list of intergers to be inserted into a worksheet
+    Receives a list of integers to be inserted into a worksheet
     Update the relevant worksheet with the data provided
     """
     print(f"Updating {worksheet} worksheet...\n")
@@ -93,11 +71,11 @@ def update_worksheet(data, worksheet):
 
 def calculate_surplus_data(sales_row):
     """
-    Compare sales with stock and calulate the surplus for each item type.
+    Compare sales with stock and calculate the surplus for each item type.
 
     The surplus is defined as the sales figure subtracted from the stock:
-    - Positive surplis indicates waste
-    - Negative surplis indicates extra made when stock was sold out.
+    - Positive surplus indicates waste
+    - Negative surplus indicates extra made when stock was sold out.
     """
     print("Calculating surplus data...\n")
     stock = SHEET.worksheet("stock").get_all_values()
@@ -113,7 +91,7 @@ def calculate_surplus_data(sales_row):
 
 def get_last_5_entries_sales():
     """
-    Collects collums of data from sales worksheet, collecting
+    Collects columns of data from sales worksheet, collecting
     the last 5 entries for each sandwich and returns the data
     as a list of lists.
     """
